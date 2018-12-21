@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5DD5281A218A80D100DC9769 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52819218A80D100DC9769 /* AppDelegate.swift */; };
-		5DD5281C218A80D100DC9769 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5281B218A80D100DC9769 /* ViewController.swift */; };
+		5DD5281C218A80D100DC9769 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5281B218A80D100DC9769 /* MainViewController.swift */; };
 		5DD5281F218A80D100DC9769 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5281D218A80D100DC9769 /* Main.storyboard */; };
 		5DD52821218A80D300DC9769 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD52820218A80D300DC9769 /* Assets.xcassets */; };
 		5DD52824218A80D300DC9769 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */; };
 		5DD5282F218A80D300DC9769 /* J_TunerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5282E218A80D300DC9769 /* J_TunerTests.swift */; };
 		5DD5283A218A80D400DC9769 /* J_TunerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52839218A80D400DC9769 /* J_TunerUITests.swift */; };
+		5DD5284A218A848600DC9769 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52849218A848600DC9769 /* MainView.swift */; };
+		5DD5284C218A8D5F00DC9769 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */; };
+		5DD5284E218A9E6300DC9769 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5284D218A9E6300DC9769 /* Recorder.swift */; };
+		5DD52853218AC04B00DC9769 /* GetPitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52851218AC04B00DC9769 /* GetPitch.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +40,7 @@
 /* Begin PBXFileReference section */
 		5DD52816218A80D100DC9769 /* J-Tuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "J-Tuner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD52819218A80D100DC9769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5DD5281B218A80D100DC9769 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5DD5281B218A80D100DC9769 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5DD5281E218A80D100DC9769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5DD52820218A80D300DC9769 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DD52823218A80D300DC9769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +51,12 @@
 		5DD52835218A80D400DC9769 /* J-TunerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "J-TunerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD52839218A80D400DC9769 /* J_TunerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = J_TunerUITests.swift; sourceTree = "<group>"; };
 		5DD5283B218A80D400DC9769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DD52849218A848600DC9769 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		5DD5284D218A9E6300DC9769 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		5DD52850218AC04A00DC9769 /* J-Tuner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "J-Tuner-Bridging-Header.h"; sourceTree = "<group>"; };
+		5DD52851218AC04B00DC9769 /* GetPitch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPitch.cpp; sourceTree = "<group>"; };
+		5DD52852218AC04B00DC9769 /* GetPitch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GetPitch.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,7 @@
 		5DD5280D218A80D100DC9769 = {
 			isa = PBXGroup;
 			children = (
+				5DD5284F218AC02600DC9769 /* Signal Processing */,
 				5DD52818218A80D100DC9769 /* J-Tuner */,
 				5DD5282D218A80D300DC9769 /* J-TunerTests */,
 				5DD52838218A80D400DC9769 /* J-TunerUITests */,
@@ -98,11 +109,14 @@
 			isa = PBXGroup;
 			children = (
 				5DD52819218A80D100DC9769 /* AppDelegate.swift */,
-				5DD5281B218A80D100DC9769 /* ViewController.swift */,
+				5DD5281B218A80D100DC9769 /* MainViewController.swift */,
 				5DD5281D218A80D100DC9769 /* Main.storyboard */,
 				5DD52820218A80D300DC9769 /* Assets.xcassets */,
 				5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */,
 				5DD52825218A80D300DC9769 /* Info.plist */,
+				5DD52849218A848600DC9769 /* MainView.swift */,
+				5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */,
+				5DD5284D218A9E6300DC9769 /* Recorder.swift */,
 			);
 			path = "J-Tuner";
 			sourceTree = "<group>";
@@ -123,6 +137,16 @@
 				5DD5283B218A80D400DC9769 /* Info.plist */,
 			);
 			path = "J-TunerUITests";
+			sourceTree = "<group>";
+		};
+		5DD5284F218AC02600DC9769 /* Signal Processing */ = {
+			isa = PBXGroup;
+			children = (
+				5DD52851218AC04B00DC9769 /* GetPitch.cpp */,
+				5DD52852218AC04B00DC9769 /* GetPitch.hpp */,
+				5DD52850218AC04A00DC9769 /* J-Tuner-Bridging-Header.h */,
+			);
+			path = "Signal Processing";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +217,7 @@
 				TargetAttributes = {
 					5DD52815218A80D100DC9769 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 					5DD52829218A80D300DC9769 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -256,7 +281,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DD5281C218A80D100DC9769 /* ViewController.swift in Sources */,
+				5DD5284E218A9E6300DC9769 /* Recorder.swift in Sources */,
+				5DD52853218AC04B00DC9769 /* GetPitch.cpp in Sources */,
+				5DD5284C218A8D5F00DC9769 /* NoteViewController.swift in Sources */,
+				5DD5281C218A80D100DC9769 /* MainViewController.swift in Sources */,
+				5DD5284A218A848600DC9769 /* MainView.swift in Sources */,
 				5DD5281A218A80D100DC9769 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +380,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -410,6 +440,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -430,6 +461,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A567GRMMF5;
 				INFOPLIST_FILE = "J-Tuner/Info.plist";
@@ -439,6 +473,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bignerdranch.J-Tuner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Signal Processing/J-Tuner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -448,6 +485,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A567GRMMF5;
 				INFOPLIST_FILE = "J-Tuner/Info.plist";
@@ -457,6 +497,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bignerdranch.J-Tuner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Signal Processing/J-Tuner-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
