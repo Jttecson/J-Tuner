@@ -2,6 +2,9 @@
 //  GetPitch.cpp
 //  J-Tuner
 //
+//  Implements Mcleod Pitch Method, by Philip McLeod, Geoff Wyvill.
+//  See http://miracle.otago.ac.nz/tartini/papers/A_Smarter_Way_to_Find_Pitch.pdf for details.
+//
 //  Created by Joel Tecson on 2018-10-31.
 //  Copyright © 2018 bignerdranch. All rights reserved.
 //
@@ -14,7 +17,7 @@
 
 const float freqDenom = 0.0250858; // Used to convert frequency to note on midi scale
 const int windowSize = 1024;
-const float peakThreshold = 0.8;
+const float kFactor = 0.85;
 
 // Returns note of the sampled waveform 0-indexed, starting from C0
 // Data      -   Waveform data
@@ -36,7 +39,7 @@ double getPitch(float data[], int size, int sampRate)
 // sampRate  -   Sampling frequency in Hz.
 double getFrequency(float data[], int size, int sampRate)
 {
-    return sampRate/peakDistance(data, size);
+    return float(sampRate)/peakDistance(data, size);
 }
 
 // Returns average distance between peaks of signal, in number of samples.
@@ -44,23 +47,20 @@ double getFrequency(float data[], int size, int sampRate)
 // Size      -   Number of samples in data
 float peakDistance(float data[], int size)
 {
-    int above = 0;
     int searching = 0;
     std::vector<int> indices;
     int index = 0;
     int lastZeroCross = -INT_MAX;
     float max = -INT_MAX;
-    for(int i = 0; i < size; i++)
+    // Set a cap to potential tau-values, assuming we are concerned
+    // with frequencies >16Hz (C0)
+    int maxTau = (size-1 < 750) ? size - 1 : 750;
+    for(int i = 1; i < maxTau; i++)
     {
-        if(i-lastZeroCross < 5)
-        {
-            continue;
-        }
         if(!searching)
         {
-            if(data[i] > 0 && !above)
+            if(data[i] > 0 && data[i-1] <= 0)
             {
-                above = 1;
                 searching = 1;
                 lastZeroCross = i;
             }
@@ -69,7 +69,6 @@ float peakDistance(float data[], int size)
         {
             if(data[i] < 0)
             {
-                above = 0;
                 searching = 0;
                 lastZeroCross = i;
                 max = -INT_MAX;
@@ -81,23 +80,26 @@ float peakDistance(float data[], int size)
             }
             else
             {
-                if(data[i] > max)
+                // Slight parabolic interpolation to find true peak
+                if(data[i-1] + data[i] + data[i+1] > max)
                 {
-                    max = data[i];
+                    max = data[i-1] + data[i] + data[i+1];
                     index = i;
                 }
             }
         }
     }
 
-    // Filters false positive peaks detected by computing distance to mean peak value
-    double total = 0;
+    // Filters false positive peaks
+    double totMax = -INT_MAX;
     for(int j = 0; j < indices.size(); j++)
     {
-        total += data[indices.at(j)];
+        if(data[indices.at(j)] > totMax)
+        {
+            totMax = data[indices.at(j)];
+        }
     }
-    double mean = total / indices.size();
-    double threshold = mean * peakThreshold;
+    double threshold = totMax * kFactor;
     for(long k = indices.size() - 1; k >= 0; k--)
     {
         if(data[indices.at(k)] < threshold)
@@ -107,7 +109,7 @@ float peakDistance(float data[], int size)
     }
     if(indices.size() > 0)
     {
-        return (indices.back()-indices.front())/float(indices.size()-1);
+        return indices.front();
     }
     else
     {
