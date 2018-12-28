@@ -12,20 +12,38 @@ import AVFoundation
 
 class NoteViewController: UIViewController, AVAudioRecorderDelegate {
 
-    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var tuneButton: UIButton!
 
+//    var parentViewController = 
     var audioSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder?
+    var recorder: Recorder?
     var audioPlayer: AVAudioPlayer?
     var numberOfRecords = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view, typically from a nib.
         audioSession = AVAudioSession.sharedInstance()
         audioSession.requestRecordPermission { (permissionGranted) in
             if !permissionGranted {
                 print("ERROR")
+            }
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        recorder = Recorder(samplePeriod: 1, recordingsPerSample: 1, audioSession: audioSession)
+        if let parent = parent
+        {
+            for child in parent.childViewControllers
+            {
+                if child is MeterViewController
+                {
+                    recorder?.meterViewController = child as? MeterViewController
+                    break
+                }
             }
         }
     }
@@ -40,30 +58,11 @@ class NoteViewController: UIViewController, AVAudioRecorderDelegate {
         return paths[0]
     }
 
-    @IBAction func recordButton(_ sender: Any?) {
+    @IBAction func tuneButton(_ sender: Any?) {
         numberOfRecords += 1
-        let filename = getDirectory().appendingPathComponent("\(numberOfRecords).m4a")
-        let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
-        do {
-            audioRecorder = try AVAudioRecorder(url: filename, settings: settings)
-            audioRecorder?.delegate = self
-            audioRecorder?.deleteRecording()
-            recordButton.setTitle("recording", for: .normal)
-            audioRecorder?.record()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.audioRecorder?.stop()
-                self.recordButton.setTitle("done", for: .normal)
-                do {
-                    self.audioPlayer = try AVAudioPlayer(contentsOf: filename)
-                    self.audioPlayer?.play()
-                    if let tuple = self.loadAudioSignal(audioURL: filename) {
-                        // must be var due to mutability arrays in C
-                    }
-                } catch {
-
-                }
-            }
-        } catch {
+        if let recorder = recorder
+        {
+            recorder.startRecording()
         }
     }
 
