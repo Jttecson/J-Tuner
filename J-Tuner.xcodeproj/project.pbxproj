@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D2C300721CF55F200F410B3 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2C300621CF55F200F410B3 /* Note.swift */; };
+		5D33AADC21CE3B0600B2B9BC /* MeterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D33AADB21CE3B0600B2B9BC /* MeterViewController.swift */; };
 		5DD5281A218A80D100DC9769 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52819218A80D100DC9769 /* AppDelegate.swift */; };
 		5DD5281C218A80D100DC9769 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5281B218A80D100DC9769 /* MainViewController.swift */; };
 		5DD5281F218A80D100DC9769 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5281D218A80D100DC9769 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D2C300621CF55F200F410B3 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		5D33AADB21CE3B0600B2B9BC /* MeterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterViewController.swift; sourceTree = "<group>"; };
 		5DD52816218A80D100DC9769 /* J-Tuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "J-Tuner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD52819218A80D100DC9769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DD5281B218A80D100DC9769 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -109,14 +113,16 @@
 			isa = PBXGroup;
 			children = (
 				5DD52819218A80D100DC9769 /* AppDelegate.swift */,
-				5DD5281B218A80D100DC9769 /* MainViewController.swift */,
-				5DD5281D218A80D100DC9769 /* Main.storyboard */,
 				5DD52820218A80D300DC9769 /* Assets.xcassets */,
-				5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */,
 				5DD52825218A80D300DC9769 /* Info.plist */,
+				5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */,
+				5DD5281D218A80D100DC9769 /* Main.storyboard */,
 				5DD52849218A848600DC9769 /* MainView.swift */,
+				5DD5281B218A80D100DC9769 /* MainViewController.swift */,
+				5D2C300621CF55F200F410B3 /* Note.swift */,
 				5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */,
 				5DD5284D218A9E6300DC9769 /* Recorder.swift */,
+				5D33AADB21CE3B0600B2B9BC /* MeterViewController.swift */,
 			);
 			path = "J-Tuner";
 			sourceTree = "<group>";
@@ -284,9 +290,11 @@
 				5DD5284E218A9E6300DC9769 /* Recorder.swift in Sources */,
 				5DD52853218AC04B00DC9769 /* GetPitch.cpp in Sources */,
 				5DD5284C218A8D5F00DC9769 /* NoteViewController.swift in Sources */,
+				5D2C300721CF55F200F410B3 /* Note.swift in Sources */,
 				5DD5281C218A80D100DC9769 /* MainViewController.swift in Sources */,
 				5DD5284A218A848600DC9769 /* MainView.swift in Sources */,
 				5DD5281A218A80D100DC9769 /* AppDelegate.swift in Sources */,
+				5D33AADC21CE3B0600B2B9BC /* MeterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
