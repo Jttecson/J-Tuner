@@ -17,7 +17,14 @@ class MeterViewController: UIViewController
 
     func updateMeter(string: String)
     {
-        meterLabel.text = string
+        if Thread.isMainThread {
+            meterLabel.text = string
+        } else {
+            DispatchQueue.main.sync {
+                meterLabel.text = string
+            }
+        }
+        print(string)
     }
 
     func clearMeter()

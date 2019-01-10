@@ -14,7 +14,6 @@ class NoteViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBOutlet weak var tuneButton: UIButton!
 
-//    var parentViewController = 
     var audioSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder?
     var recorder: Recorder?
@@ -34,7 +33,7 @@ class NoteViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        recorder = Recorder(samplePeriod: 1, recordingsPerSample: 1, audioSession: audioSession)
+        recorder = Recorder(audioSession: audioSession)
         if let parent = parent
         {
             for child in parent.childViewControllers

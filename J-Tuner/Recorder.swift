@@ -9,42 +9,43 @@
 import Foundation
 import AVFoundation
 
-private struct Constants
+public struct Constants
 {
-    static let samplesPerWindow = 4
-    static let sampleFrequency = 12000
-    static let windowSize = 4096
+    static let samplesPerWindow = 1
+    static let sampleFrequency = 44100
+    static let windowSize = 2048
 }
 
 class Recorder
 {
     private let samplePeriod: TimeInterval
-    private let recordingsPerSample: Int
     private var audioSession: AVAudioSession!
-    private var keepRecording: Bool?
+    private(set) var isRecording: Bool?
 
-    private var AudioRecorders: [AVAudioRecorder?]
+    private var audioRecorders: [AVAudioRecorder]
     private var queuedPitches: [Int: Float] = [:]
 
     public var meterViewController: MeterViewController?
 
-    public init?(samplePeriod: TimeInterval, recordingsPerSample: Int, audioSession: AVAudioSession)
+    public init?(audioSession: AVAudioSession)
     {
-        self.samplePeriod = samplePeriod
-        self.recordingsPerSample = recordingsPerSample
+        self.samplePeriod = Double(Constants.windowSize)/Double(Constants.sampleFrequency)
         self.audioSession = audioSession
-        self.AudioRecorders = []
+        self.audioRecorders = []
 
-        for var i in 0..<Constants.samplesPerWindow*2
+        for var i in 0..<Constants.samplesPerWindow*4
         {
             let filename = getDirectory(for: i)
-            let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
+            let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: Constants.sampleFrequency, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             var audioRecorder: AVAudioRecorder?
             do
             {
                 audioRecorder = try AVAudioRecorder(url: filename, settings: settings)
-                audioRecorder?.deleteRecording()
-                self.AudioRecorders.append(audioRecorder)
+                if let audioRecorder = audioRecorder
+                {
+                    audioRecorder.deleteRecording()
+                    self.audioRecorders.append(audioRecorder)
+                }
             }
             catch
             {
@@ -62,70 +63,54 @@ class Recorder
 
     public func startRecording()
     {
-        keepRecording = true
-        let recordingPeriod = TimeInterval(1.0 / Float((Constants.sampleFrequency / Constants.windowSize)))
-        DispatchQueue.global().async {
-            repeat
+        isRecording = true
+        let recordingPeriod = TimeInterval(Float(Constants.windowSize)/Float(Constants.sampleFrequency))
+        DispatchQueue.main.async
+        {
+            self.keepRecording()
+        }
+    }
+
+    public func keepRecording()
+    {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05)
+        {
+            self.keepRecording()
+        }
+        let recordingPeriod = TimeInterval(Float(Constants.windowSize)/Float(Constants.sampleFrequency))
+        if(self.isRecording ?? false)
+        {
+            if let audioRecorder = nextRecorder()
             {
-                for (index, audioRecorder) in self.AudioRecorders.enumerated()
+                audioRecorder.record()
+                DispatchQueue.global().asyncAfter(deadline: .now() + recordingPeriod)
                 {
-                    guard let audioRecorder = audioRecorder else { continue }
-                    audioRecorder.deleteRecording()
-                    audioRecorder.record()
-                    DispatchQueue.main.async
+                    audioRecorder.stop()
+                    if let pitch = self.finishSampling(audioRecorder: audioRecorder), let note = Note(pitch: Double(pitch))
                     {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + recordingPeriod)
-                        {
-                            if let pitch = self.finishSampling(audioRecorder: audioRecorder, index: self.AudioRecorders.index(of: audioRecorder))
-                            {
-                                print(pitch)
-                                if let note = Note(pitch: Double(pitch))
-                                {
-                                    self.meterViewController?.updateMeter(string: note.note)
-                                }
-//                                if(index % 2 == 0)
-//                                {
-//                                    self.queuedPitches[index] = pitch
-//                                } else
-//                                {
-//                                    var queuedPitch = self.queuedPitches[index-1] ?? pitch
-//                                    if queuedPitch.isNaN { queuedPitch = pitch }
-//                                    if let note = Note(pitch: Double((pitch + queuedPitch) / 2))
-//                                    {
-//                                        self.meterViewController?.updateMeter(string: note.note)
-//                                    } else
-//                                    {
-////                                        self.meterViewController?.clearMeter()
-//                                    }
-//                                }
-                            }
-                        }
+                        self.meterViewController?.updateMeter(string: note.note)
                     }
-                    // Use usleep here to pause thread which runs overall repeat loop
-                    // Sets functional time interval for one loop iteration
-                    usleep(useconds_t((Float(Constants.windowSize)/Float(Constants.samplesPerWindow))/Float(Constants.sampleFrequency)*1000000))
                 }
             }
-            while self.keepRecording ?? false
         }
     }
 
     public func stopRecording()
     {
-        keepRecording = false
+        isRecording = false
     }
 
-    public func isRecording() -> Bool
+    private func nextRecorder() -> AVAudioRecorder?
     {
-        return true
+        return audioRecorders.first(where: { audioRecorder in !audioRecorder.isRecording })
     }
 
-    private func finishSampling(audioRecorder: AVAudioRecorder?, index: Int?) -> Float?
+    public func finishSampling(audioRecorder: AVAudioRecorder) -> Float?
     {
-        audioRecorder?.stop()
-        if let index = index, var (data, _, _) = loadAudioSignal(audioURL: getDirectory(for: index))
+        audioRecorder.stop()
+        if let index = audioRecorders.index(of: audioRecorder), var (data, _, _) = loadAudioSignal(audioURL: getDirectory(for: index))
         {
-            let pitch = getPitch(&data, Int32(data.count), Int32(Constants.sampleFrequency))
+            let pitch = getPitch(&data, Int32(data.count), Int32(Constants.windowSize), Int32(Constants.sampleFrequency))
             return Float(pitch)
         }
         return nil

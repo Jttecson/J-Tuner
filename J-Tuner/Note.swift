@@ -11,13 +11,13 @@ import Foundation
 class Note
 {
     public let tone: String
-    public let offset: Double
+//    public let cents: Int
 
     public var note: String
     {
-        let plusminus = offset > 0 ? "+" : "-"
+//        let plusminus = cents > 0 ? "+" : "-"
         return self.tone
-       // return self.tone + " \(plusminus) " + String(abs(offset.rounded()))
+//        return self.tone + " \(plusminus) " + String(abs(cents))
     }
 
     public init?(pitch: Double)
@@ -49,7 +49,7 @@ class Note
                 return nil
             }
         }
-        offset = pitch * 100 - pitch.rounded()*100
+//        self.cents = Int(1200*log2f.rounded())
         self.tone = tone + String(Int(pitch.rounded()) / 12)
     }
 }
