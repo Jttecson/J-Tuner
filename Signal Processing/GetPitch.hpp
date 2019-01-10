@@ -13,9 +13,9 @@
 extern "C" {
 #endif
 void asdf();
-double getPitch(float data[], int size, int Hz);
-double getFrequency(float data[], int size, int Hz);
-float peakDistance(float data[], int size);
+double getPitch(float data[], int size, int windowSize, int Hz);
+double getFrequency(float data[], int size, int windowSize, int Hz);
+float peakDistance(float data[], int size, int windowSize);
 double getNSDF(int time, int tau, int window, float data[]);
 double getAcf(int time, int tau, int window, float data[]);
 double getMt(int time, int tau, int window, float data[]);

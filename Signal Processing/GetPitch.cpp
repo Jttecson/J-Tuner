@@ -14,38 +14,38 @@
 #include <math.h>
 #include <vector>
 
-
-const float freqDenom = 0.0250858; // Used to convert frequency to note on midi scale
-const int windowSize = 1024;
 const float kFactor = 0.85;
 
 // Returns note of the sampled waveform 0-indexed, starting from C0
-// Data      -   Waveform data
-// Size      -   Number of samples in data
-// sampRate  -   Sampling frequency in Hz.
-double getPitch(float data[], int size, int sampRate)
+// data       -   Waveform data
+// size       -   Number of samples in data
+// windowSize -   Number of samples in window
+// sampRate   -   Sampling frequency in Hz.
+double getPitch(float data[], int size, int windowSize, int sampRate)
 {
     float mpdData[size];
     for(int i = 0; i < size; i++)
     {
         mpdData[i] = getNSDF(0, i, windowSize, data);
     }
-    return log10f(getFrequency(mpdData, size, sampRate)/27.5)/freqDenom + 9;
+    return log2f(getFrequency(mpdData, size, windowSize, sampRate)/440)*12 + 57;
 }
 
 // Returns the frequency of the sampled data in Hz.
-// Data      -   Waveform data
-// Size      -   Number of samples in data
-// sampRate  -   Sampling frequency in Hz.
-double getFrequency(float data[], int size, int sampRate)
+// data       -   Waveform data
+// size       -   Number of samples in data
+// windowSize -   Number of samples in window
+// sampRate   -   Sampling frequency in Hz.
+double getFrequency(float data[], int size, int windowSize, int sampRate)
 {
-    return float(sampRate)/peakDistance(data, size);
+    return float(sampRate)/peakDistance(data, size, windowSize);
 }
 
 // Returns average distance between peaks of signal, in number of samples.
-// Data      -   Waveform data
-// Size      -   Number of samples in data
-float peakDistance(float data[], int size)
+// data       -   Waveform data
+// size       -   Number of samples in data
+// windowSize -   Number of samples in window
+float peakDistance(float data[], int size, int windowSize)
 {
     int searching = 0;
     std::vector<int> indices;
@@ -54,7 +54,7 @@ float peakDistance(float data[], int size)
     float max = -INT_MAX;
     // Set a cap to potential tau-values, assuming we are concerned
     // with frequencies >16Hz (C0)
-    int maxTau = (size-1 < 750) ? size - 1 : 750;
+    int maxTau = (size-1 < 3000) ? size - 1 : 3000;
     for(int i = 1; i < maxTau; i++)
     {
         if(!searching)
