@@ -14,7 +14,7 @@
 #include <math.h>
 #include <vector>
 
-const float kFactor = 0.85;
+const float kFactor = 0.8;
 
 // Returns note of the sampled waveform 0-indexed, starting from C0
 // data       -   Waveform data

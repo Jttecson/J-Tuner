@@ -8,31 +8,22 @@
 
 import Foundation
 
-class Note
-{
+class Note {
     public let tone: String
-//    public let cents: Int
+    public let cents: Int
 
-    public var note: String
-    {
-//        let plusminus = cents > 0 ? "+" : "-"
-        return self.tone
-//        return self.tone + " \(plusminus) " + String(abs(cents))
+    public var note: String {
+        let plusminus = cents > 0 ? "+" : "-"
+        return cents == 0 ? self.tone : self.tone + " \(plusminus) " + String(abs(cents))
     }
 
-    public init?(pitch: Double)
-    {
+    public init?(pitch: Double) {
         guard !pitch.isNaN else { return nil }
         var tone: String
-        if(pitch < 0)
-        {
-            return nil
-        }
-        else
-        {
+        if(pitch < 0) { return nil }
+        else {
             let pitchInt = Int(pitch.rounded())
-            switch pitchInt % 12
-            {
+            switch pitchInt % 12 {
             case 0: tone = "C"
             case 1: tone = "C#/Db"
             case 2: tone = "D"
@@ -49,7 +40,9 @@ class Note
                 return nil
             }
         }
-//        self.cents = Int(1200*log2f.rounded())
         self.tone = tone + String(Int(pitch.rounded()) / 12)
+        var cents = Int(pitch*100.rounded()) - Int(pitch.rounded())*100
+        if(abs(cents) < 11) { cents = 0 }
+        self.cents = cents
     }
 }

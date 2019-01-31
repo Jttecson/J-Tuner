@@ -34,8 +34,7 @@ class NoteViewController: UIViewController, AVAudioRecorderDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         recorder = Recorder(audioSession: audioSession)
-        if let parent = parent
-        {
+        if let parent = parent {
             for child in parent.childViewControllers
             {
                 if child is MeterViewController
@@ -59,22 +58,15 @@ class NoteViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBAction func tuneButton(_ sender: Any?) {
         numberOfRecords += 1
-        if let recorder = recorder
-        {
-            recorder.startRecording()
-        }
+        if let recorder = recorder { recorder.startRecording() }
     }
 
-    func loadAudioSignal(audioURL: URL) -> (signal: [Float], rate: Double, frameCount: Int)?
-    {
+    func loadAudioSignal(audioURL: URL) -> (signal: [Float], rate: Double, frameCount: Int)? {
         guard
             let file = try? AVAudioFile(forReading: audioURL),
             let format = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: file.fileFormat.sampleRate, channels: file.fileFormat.channelCount, interleaved: false),
             let buf = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: UInt32(file.length))
-        else
-        {
-            return nil
-        }
+        else { return nil }
         try? file.read(into: buf)
         let floatArray = Array(UnsafeBufferPointer(start: buf.floatChannelData?[0], count:Int(buf.frameLength)))
         return (signal: floatArray, rate: file.fileFormat.sampleRate, frameCount: Int(file.length))

@@ -10,13 +10,10 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class MeterViewController: UIViewController
-{
-
+class MeterViewController: UIViewController {
     @IBOutlet weak var meterLabel: UILabel!
 
-    func updateMeter(string: String)
-    {
+    func updateMeter(string: String) {
         if Thread.isMainThread {
             meterLabel.text = string
         } else {
@@ -27,8 +24,7 @@ class MeterViewController: UIViewController
         print(string)
     }
 
-    func clearMeter()
-    {
+    func clearMeter() {
         meterLabel.text = ""
     }
 }
