@@ -35,7 +35,7 @@ class NoteViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidAppear(_ animated: Bool) {
         recorder = Recorder(audioSession: audioSession)
         if let parent = parent {
-            for child in parent.childViewControllers
+            for child in parent.children
             {
                 if child is MeterViewController
                 {

@@ -223,14 +223,16 @@
 				TargetAttributes = {
 					5DD52815218A80D100DC9769 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1020;
 					};
 					5DD52829218A80D300DC9769 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 5DD52815218A80D100DC9769;
 					};
 					5DD52834218A80D400DC9769 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 5DD52815218A80D100DC9769;
 					};
 				};
@@ -484,7 +486,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Signal Processing/J-Tuner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -507,7 +509,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Signal Processing/J-Tuner-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -527,7 +529,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bignerdranch.J-TunerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/J-Tuner.app/J-Tuner";
 			};
@@ -548,7 +550,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bignerdranch.J-TunerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/J-Tuner.app/J-Tuner";
 			};
@@ -568,7 +570,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bignerdranch.J-TunerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "J-Tuner";
 			};
@@ -588,7 +590,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bignerdranch.J-TunerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "J-Tuner";
 			};

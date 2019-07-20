@@ -10,12 +10,13 @@ import Foundation
 import AVFoundation
 
 public struct Constants {
-    static let samplesPerWindow = 1
+    static let samplesPerWindow = 2
     static let sampleFrequency = 44100
-    static let windowSize = 2048
+    static let windowSize = 1024
 }
 
 class Recorder {
+    private var a: Int = 0
     private let samplePeriod: TimeInterval
     private var audioSession: AVAudioSession!
     private(set) var isRecording: Bool?
@@ -30,7 +31,7 @@ class Recorder {
         self.audioSession = audioSession
         self.audioRecorders = []
 
-        for var i in 0..<Constants.samplesPerWindow*4 {
+        for var i in 0..<Constants.samplesPerWindow {
             let filename = getDirectory(for: i)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: Constants.sampleFrequency, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             var audioRecorder: AVAudioRecorder?
@@ -69,7 +70,9 @@ class Recorder {
         if(self.isRecording ?? false) {
             if let audioRecorder = nextRecorder() {
                 audioRecorder.record()
-                DispatchQueue.global().asyncAfter(deadline: .now() + recordingPeriod) {
+                print("A")
+                DispatchQueue.global().asyncAfter(deadline: .now() + recordingPeriod, qos: .userInteractive) {
+                    print("B")
                     audioRecorder.stop()
                     if let pitch = self.finishSampling(audioRecorder: audioRecorder), let note = Note(pitch: Double(pitch)) {
                         self.meterViewController?.updateMeter(string: note.note)
@@ -89,8 +92,8 @@ class Recorder {
 
     public func finishSampling(audioRecorder: AVAudioRecorder) -> Float? {
         audioRecorder.stop()
-        if let index = audioRecorders.index(of: audioRecorder), var (data, _, _) = loadAudioSignal(audioURL: getDirectory(for: index)) {
-            let pitch = getPitch(&data, Int32(data.count), Int32(Constants.windowSize), Int32(Constants.sampleFrequency))
+        if let index = audioRecorders.firstIndex(of: audioRecorder), var (data, _, _) = loadAudioSignal(audioURL: getDirectory(for: index)) {
+            let pitch = getPitch(&data, Int32(min(data.count, Constants.windowSize)), Int32(Constants.windowSize), Int32(Constants.sampleFrequency))
             return Float(pitch)
         }
         return nil
