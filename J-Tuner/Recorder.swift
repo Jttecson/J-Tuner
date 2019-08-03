@@ -17,6 +17,7 @@ public struct Constants {
 
 class Recorder {
     private var a: Int = 0
+    private var lastPitches: [Float] = []
     private let samplePeriod: TimeInterval
     private var audioSession: AVAudioSession!
     private(set) var isRecording: Bool?
@@ -24,7 +25,8 @@ class Recorder {
     private var audioRecorders: [AVAudioRecorder]
     private var queuedPitches: [Int: Float] = [:]
 
-    public var meterViewController: MeterViewController?
+    public var meterView: MeterView?
+    public var gaugeView: GaugeView?
 
     public init?(audioSession: AVAudioSession) {
         self.samplePeriod = Double(Constants.windowSize)/Double(Constants.sampleFrequency)
@@ -39,6 +41,7 @@ class Recorder {
                 audioRecorder = try AVAudioRecorder(url: filename, settings: settings)
                 if let audioRecorder = audioRecorder {
                     audioRecorder.deleteRecording()
+                    audioRecorder.isMeteringEnabled = true
                     self.audioRecorders.append(audioRecorder)
                 }
             }
@@ -70,12 +73,20 @@ class Recorder {
         if(self.isRecording ?? false) {
             if let audioRecorder = nextRecorder() {
                 audioRecorder.record()
-                print("A")
                 DispatchQueue.global().asyncAfter(deadline: .now() + recordingPeriod, qos: .userInteractive) {
-                    print("B")
-                    audioRecorder.stop()
-                    if let pitch = self.finishSampling(audioRecorder: audioRecorder), let note = Note(pitch: Double(pitch)) {
-                        self.meterViewController?.updateMeter(string: note.note)
+                    if let pitch = self.finishSampling(audioRecorder: audioRecorder) {
+                        self.lastPitches.append(pitch)
+                        if(self.lastPitches.count == 5) {
+                            self.lastPitches.sort()
+                            let new = (self.lastPitches.reduce(0, +) - self.lastPitches.first! - self.lastPitches.last!) / 3
+                            if let note = Note(pitch: Double(new)) {
+                                self.meterView?.updateMeter(string: note.note)
+                                DispatchQueue.main.sync {
+                                    self.gaugeView?.value = note.cents
+                                }
+                            }
+                            self.lastPitches = []
+                        }
                     }
                 }
             }
@@ -91,6 +102,12 @@ class Recorder {
     }
 
     public func finishSampling(audioRecorder: AVAudioRecorder) -> Float? {
+        audioRecorder.updateMeters()
+        if(audioRecorder.averagePower(forChannel: 0) < -60) {
+            meterView?.updateMeter(string: "TOO SOFT")
+            audioRecorder.stop()
+            return nil
+        }
         audioRecorder.stop()
         if let index = audioRecorders.firstIndex(of: audioRecorder), var (data, _, _) = loadAudioSignal(audioURL: getDirectory(for: index)) {
             let pitch = getPitch(&data, Int32(min(data.count, Constants.windowSize)), Int32(Constants.windowSize), Int32(Constants.sampleFrequency))

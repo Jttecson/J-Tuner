@@ -8,16 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		5D2C300721CF55F200F410B3 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2C300621CF55F200F410B3 /* Note.swift */; };
-		5D33AADC21CE3B0600B2B9BC /* MeterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D33AADB21CE3B0600B2B9BC /* MeterViewController.swift */; };
+		5D33AADC21CE3B0600B2B9BC /* MeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D33AADB21CE3B0600B2B9BC /* MeterView.swift */; };
+		5D426C7D22E2ED0F003A05A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D426C7C22E2ED0F003A05A3 /* Main.storyboard */; };
+		5D426C7F22E2ED3E003A05A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D426C7E22E2ED3E003A05A3 /* Assets.xcassets */; };
+		5D426C8122E2EFFC003A05A3 /* TunerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D426C8022E2EFFC003A05A3 /* TunerViewController.swift */; };
+		5D426C8322E2F004003A05A3 /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D426C8222E2F004003A05A3 /* GaugeView.swift */; };
+		5D426C8522E2F00A003A05A3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D426C8422E2F00A003A05A3 /* Utilities.swift */; };
 		5DD5281A218A80D100DC9769 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52819218A80D100DC9769 /* AppDelegate.swift */; };
 		5DD5281C218A80D100DC9769 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5281B218A80D100DC9769 /* MainViewController.swift */; };
-		5DD5281F218A80D100DC9769 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD5281D218A80D100DC9769 /* Main.storyboard */; };
-		5DD52821218A80D300DC9769 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD52820218A80D300DC9769 /* Assets.xcassets */; };
 		5DD52824218A80D300DC9769 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */; };
 		5DD5282F218A80D300DC9769 /* J_TunerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5282E218A80D300DC9769 /* J_TunerTests.swift */; };
 		5DD5283A218A80D400DC9769 /* J_TunerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52839218A80D400DC9769 /* J_TunerUITests.swift */; };
 		5DD5284A218A848600DC9769 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52849218A848600DC9769 /* MainView.swift */; };
-		5DD5284C218A8D5F00DC9769 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */; };
 		5DD5284E218A9E6300DC9769 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5284D218A9E6300DC9769 /* Recorder.swift */; };
 		5DD52853218AC04B00DC9769 /* GetPitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DD52851218AC04B00DC9769 /* GetPitch.cpp */; };
 /* End PBXBuildFile section */
@@ -41,12 +43,15 @@
 
 /* Begin PBXFileReference section */
 		5D2C300621CF55F200F410B3 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		5D33AADB21CE3B0600B2B9BC /* MeterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterViewController.swift; sourceTree = "<group>"; };
+		5D33AADB21CE3B0600B2B9BC /* MeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterView.swift; sourceTree = "<group>"; };
+		5D426C7C22E2ED0F003A05A3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5D426C7E22E2ED3E003A05A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D426C8022E2EFFC003A05A3 /* TunerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunerViewController.swift; sourceTree = "<group>"; };
+		5D426C8222E2F004003A05A3 /* GaugeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
+		5D426C8422E2F00A003A05A3 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5DD52816218A80D100DC9769 /* J-Tuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "J-Tuner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DD52819218A80D100DC9769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DD5281B218A80D100DC9769 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		5DD5281E218A80D100DC9769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5DD52820218A80D300DC9769 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DD52823218A80D300DC9769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DD52825218A80D300DC9769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DD5282A218A80D300DC9769 /* J-TunerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "J-TunerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,7 +61,6 @@
 		5DD52839218A80D400DC9769 /* J_TunerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = J_TunerUITests.swift; sourceTree = "<group>"; };
 		5DD5283B218A80D400DC9769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DD52849218A848600DC9769 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		5DD5284D218A9E6300DC9769 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		5DD52850218AC04A00DC9769 /* J-Tuner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "J-Tuner-Bridging-Header.h"; sourceTree = "<group>"; };
 		5DD52851218AC04B00DC9769 /* GetPitch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GetPitch.cpp; sourceTree = "<group>"; };
@@ -113,16 +117,18 @@
 			isa = PBXGroup;
 			children = (
 				5DD52819218A80D100DC9769 /* AppDelegate.swift */,
-				5DD52820218A80D300DC9769 /* Assets.xcassets */,
 				5DD52825218A80D300DC9769 /* Info.plist */,
 				5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */,
-				5DD5281D218A80D100DC9769 /* Main.storyboard */,
+				5D426C7E22E2ED3E003A05A3 /* Assets.xcassets */,
+				5D426C7C22E2ED0F003A05A3 /* Main.storyboard */,
 				5DD52849218A848600DC9769 /* MainView.swift */,
 				5DD5281B218A80D100DC9769 /* MainViewController.swift */,
 				5D2C300621CF55F200F410B3 /* Note.swift */,
-				5DD5284B218A8D5F00DC9769 /* NoteViewController.swift */,
+				5D426C8422E2F00A003A05A3 /* Utilities.swift */,
+				5D426C8022E2EFFC003A05A3 /* TunerViewController.swift */,
 				5DD5284D218A9E6300DC9769 /* Recorder.swift */,
-				5D33AADB21CE3B0600B2B9BC /* MeterViewController.swift */,
+				5D33AADB21CE3B0600B2B9BC /* MeterView.swift */,
+				5D426C8222E2F004003A05A3 /* GaugeView.swift */,
 			);
 			path = "J-Tuner";
 			sourceTree = "<group>";
@@ -263,8 +269,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DD52824218A80D300DC9769 /* LaunchScreen.storyboard in Resources */,
-				5DD52821218A80D300DC9769 /* Assets.xcassets in Resources */,
-				5DD5281F218A80D100DC9769 /* Main.storyboard in Resources */,
+				5D426C7F22E2ED3E003A05A3 /* Assets.xcassets in Resources */,
+				5D426C7D22E2ED0F003A05A3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,14 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D426C8322E2F004003A05A3 /* GaugeView.swift in Sources */,
 				5DD5284E218A9E6300DC9769 /* Recorder.swift in Sources */,
+				5D426C8522E2F00A003A05A3 /* Utilities.swift in Sources */,
+				5D426C8122E2EFFC003A05A3 /* TunerViewController.swift in Sources */,
 				5DD52853218AC04B00DC9769 /* GetPitch.cpp in Sources */,
-				5DD5284C218A8D5F00DC9769 /* NoteViewController.swift in Sources */,
 				5D2C300721CF55F200F410B3 /* Note.swift in Sources */,
 				5DD5281C218A80D100DC9769 /* MainViewController.swift in Sources */,
 				5DD5284A218A848600DC9769 /* MainView.swift in Sources */,
 				5DD5281A218A80D100DC9769 /* AppDelegate.swift in Sources */,
-				5D33AADC21CE3B0600B2B9BC /* MeterViewController.swift in Sources */,
+				5D33AADC21CE3B0600B2B9BC /* MeterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,14 +340,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5DD5281D218A80D100DC9769 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5DD5281E218A80D100DC9769 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5DD52822218A80D300DC9769 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
